@@ -43,7 +43,7 @@ struct HomeView: View {
                     }
                 }
                 .fixedSize()
-            }
+            }.navigationBarTitleDisplayMode(.inline)
             
         }else if UIDevice.current.userInterfaceIdiom == .pad {
             VStack {
@@ -69,8 +69,10 @@ struct HomeView: View {
                     }
                     
                 }
-            }
-            .fixedSize()
+            }.navigationBarTitle("Home")
+                .navigationBarTitleDisplayMode(.inline)
+            
+                .fixedSize()
         }
     }
 }

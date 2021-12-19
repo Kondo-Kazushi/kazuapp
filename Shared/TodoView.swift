@@ -20,7 +20,10 @@ struct TodoView: View, InputViewDelegate {
                 Button(action: {
                     self.showingModal.toggle()
                 }) {
-                    Text("追加")
+                    HStack{
+                        Image(systemName: "text.badge.plus")
+                        Text("追加")
+                    }
                 }.sheet(isPresented: $showingModal) {
                     InputView(delegate: self, text: "")
                 }
@@ -59,17 +62,19 @@ struct InputView: View {
     var body: some View {
         VStack {
             Form {
-                TextField("やることを入力", text: $text)
+                Section(header: Text("ToDo")){
+                    TextField("やることを入力", text: $text)
+                }
             }
             Button(action: {
                 delegate.addTodo(text: text)
                 dismiss()
             } ) {
-                Text("Add")
+                Text("ToDoを追加")
                     .foregroundColor(Color.white)
                     .padding()
                     .background(Color.green)
-                    .cornerRadius(50)
+                    .cornerRadius(10)
             }
             Spacer()
             Button("キャンセル") {

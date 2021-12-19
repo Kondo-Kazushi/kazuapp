@@ -20,12 +20,10 @@ struct ContentView: View {
         NavigationView{
             List {
                 NavigationLink(destination: HomeView())
-                { Image(systemName: "person.fill")
-                        .foregroundColor(.green)
+                { Image(systemName: "person.fill").foregroundColor(.green)
                     Text("Home") }
                 NavigationLink(destination: SettingsView())
-                { Image(systemName: "slider.horizontal.3")
-                        .foregroundColor(.green)
+                { Image(systemName: "slider.horizontal.3").foregroundColor(.green)
                     Text("設定")
                 }
                 Section(header: Text("Tools")){
@@ -36,35 +34,30 @@ struct ContentView: View {
                         { Text("４つ目のビュー") }
                     }
                     NavigationLink(destination: SecondView())
-                    { Image(systemName: "map.fill")
+                    { Image(systemName: "map.fill").foregroundColor(.green)
                         Text("Map") }
                     NavigationLink(destination: SwiftUIsampleView())
-                    { Image(systemName: "s.circle")
-                            .foregroundColor(.green)
+                    { Image(systemName: "s.circle").foregroundColor(.green)
                         Text("Sample Content")
                     }
                     
                     NavigationLink(destination: ShareTextView())
-                    { Image(systemName: "square.and.arrow.up")
-                            .foregroundColor(.green)
+                    { Image(systemName: "square.and.arrow.up").foregroundColor(.green)
                         Text("テキストを共有")
                     }
                     
                     NavigationLink(destination: RealtimeNoteEditor())
-                    { Image(systemName: "note.text")
-                            .foregroundColor(.green)
+                    { Image(systemName: "note.text").foregroundColor(.green)
                         Text("RealtimeNoteの編集")
                     }
                     
                     NavigationLink(destination: WebpageView(loadUrl: "https://fast.com/ja/").navigationTitle("Fast.com"))
-                    { Image(systemName: "speedometer")
-                            .foregroundColor(.green)
+                    { Image(systemName: "speedometer").foregroundColor(.green)
                         Text("Fast.com")
                     }
                     
                     NavigationLink(destination: TodoView())
-                    { Image(systemName: "square.and.arrow.up")
-                            .foregroundColor(.green)
+                    { Image(systemName: "checklist").foregroundColor(.green)
                         Text("Todo")
                     }
                 }
@@ -102,10 +95,10 @@ struct ContentView: View {
                 }
                 Section(header: Text("RealtimeNote")){
                     NavigationLink(destination: RealtimeNote())
-                    { Image(systemName: "note.text")
+                    { Image(systemName: "note.text").foregroundColor(.green)
                         Text("RealtimeNote") }
                     NavigationLink(destination: RealtimeNoteEditor())
-                    { Image(systemName: "pencil")
+                    { Image(systemName: "pencil").foregroundColor(.green)
                         Text("Editor") }
                 }
             }

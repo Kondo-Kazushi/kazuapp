@@ -9,7 +9,7 @@ import SwiftUI
 
 class MinistryRecord: ObservableObject {
     /// ユーザ名
-    @Published var time: Double {
+    @Published var time: Int {
         didSet {
             UserDefaults.standard.set(time, forKey: "time")
         }
@@ -24,7 +24,7 @@ class MinistryRecord: ObservableObject {
     
     /// 初期化処理
     init() {
-        time = UserDefaults.standard.double(forKey: "time")
+        time = UserDefaults.standard.object(forKey: "time") as? Int ?? 0
         level = UserDefaults.standard.object(forKey: "level") as? Int ?? 50
     }
 }
@@ -32,24 +32,46 @@ class MinistryRecord: ObservableObject {
 var timeString: String = String("\(time)")
 
 struct MinistryRecordMonth: View {
+    @ObservedObject var goal = MinistryGoal()
+    @ObservedObject var ministryrecord = MinistryRecord()
+    
     var body: some View {
         VStack {
             ScrollView {
-                ForEach(1..<13) { index in
+                NavigationLink(destination: MinistryRecord1(),label: {Text("1月")})
+                NavigationLink(destination: MinistryRecord2(),label: {Text("2月")})
+                
+                
+                
+                ForEach(3..<13) { monthindex in
                     NavigationLink(
                         destination:
                             VStack{
-                                Text("\(index)")
-                                Text("hello")
-                                Text(timeString)
-                            },
+                                Text("\(monthindex)")
+                                Form {
+                                    Stepper(value: $ministryrecord.time, in: 1...200) {
+                                        Text("時間 : \(ministryrecord.time)")
+                                        if goal.level <= ministryrecord.time {
+                                            Text("目標達成！")
+                                        }else{
+                                            Text("目標未達成")
+                                        }
+                                    }
+                                }
+
+                        Text(timeString)
+                        if monthindex == 12 {
+                            Text("今年もお疲れ様")
+                        }
+                        },
                         label: {
-                                Text("\(index)月")
-                                    .padding()
-                                    .frame(maxWidth: .infinity)
+                            Text("\(monthindex)月")
+                                .padding()
+                                .frame(maxWidth: .infinity)
                         }).navigationTitle("月ごとの記録")
                 }
             }
+            Text("")
         }
         
     }
