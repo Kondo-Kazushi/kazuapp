@@ -16,15 +16,23 @@ struct RealtimeNote: View {
     @State private var showingModal = false
     @Environment(\.isPresented) var isPresented
     @Environment(\.dismiss) var dismiss
-
     
-
+    
+    
     var body: some View {
         
         VStack {
             HStack{
-                Text("\(RealtimeNoteTitle)").font(.title).fontWeight(.bold)
-                Spacer()
+            }
+            ScrollView(.vertical, showsIndicators: true){
+                Text("\(RealtimeNote)")
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+        }
+        .navigationTitle("\(RealtimeNoteTitle)")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing){
                 Button(action: {
                     self.showingModal.toggle()
                 }) {
@@ -32,7 +40,8 @@ struct RealtimeNote: View {
                 }.sheet(isPresented: $showingModal) {
                     RealtimeNoteEditorModal()
                 }
-
+            }
+            ToolbarItem(placement: .navigationBarTrailing){
                 Button(action: {self.showActivityView = true})
                 {
                     Image(systemName: "square.and.arrow.up")
@@ -41,11 +50,8 @@ struct RealtimeNote: View {
                     ShareSheet(text: $RealtimeNote)
                 }
             }
-            ScrollView(.vertical, showsIndicators: true){
-                Text("\(RealtimeNote)")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-            }
-        }.padding()
+        }
+        .padding()
     }
 }
 

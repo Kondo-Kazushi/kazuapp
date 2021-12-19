@@ -21,12 +21,52 @@ struct ContentView: View {
             List {
                 NavigationLink(destination: HomeView())
                 { Image(systemName: "person.fill")
+                        .foregroundColor(.green)
                     Text("Home") }
-                Section(header: Text("Tool")){
-                    NavigationLink(destination: ThirdView_1())
-                    { Text("セカンドビュー") }
-                    NavigationLink(destination: ThirdView_2())
-                    { Text("４つ目のビュー") }
+                NavigationLink(destination: SettingsView())
+                { Image(systemName: "slider.horizontal.3")
+                        .foregroundColor(.green)
+                    Text("設定")
+                }
+                Section(header: Text("Tools")){
+                    Section(header: Text("Navigation Link")){
+                        NavigationLink(destination: ThirdView_1())
+                        { Text("セカンドビュー") }
+                        NavigationLink(destination: ThirdView_2())
+                        { Text("４つ目のビュー") }
+                    }
+                    NavigationLink(destination: SecondView())
+                    { Image(systemName: "map.fill")
+                        Text("Map") }
+                    NavigationLink(destination: SwiftUIsampleView())
+                    { Image(systemName: "s.circle")
+                            .foregroundColor(.green)
+                        Text("Sample Content")
+                    }
+                    
+                    NavigationLink(destination: ShareTextView())
+                    { Image(systemName: "square.and.arrow.up")
+                            .foregroundColor(.green)
+                        Text("テキストを共有")
+                    }
+                    
+                    NavigationLink(destination: RealtimeNoteEditor())
+                    { Image(systemName: "note.text")
+                            .foregroundColor(.green)
+                        Text("RealtimeNoteの編集")
+                    }
+                    
+                    NavigationLink(destination: WebpageView(loadUrl: "https://fast.com/ja/").navigationTitle("Fast.com"))
+                    { Image(systemName: "speedometer")
+                            .foregroundColor(.green)
+                        Text("Fast.com")
+                    }
+                    
+                    NavigationLink(destination: TodoView())
+                    { Image(systemName: "square.and.arrow.up")
+                            .foregroundColor(.green)
+                        Text("Todo")
+                    }
                 }
                 Section(header: Text("Web")){
                     Section(header: Text("Recommend")){
@@ -52,26 +92,22 @@ struct ContentView: View {
                         
                     }
                 }
-                NavigationLink(destination: SecondView().navigationBarHidden(true))
-                { Image(systemName: "map.fill")
-                    Text("Map") }
-                
-                MinistryRecordView()
-                    .tabItem{ Image(systemName: "calendar.badge.plus")
-                        Text("奉仕の記録")
-                    }
-                ThirdView()
-                    .tabItem { Image(systemName: "command.square.fill")
-                        Text("Tool")
-                    }
-                FourthView()
-                    .tabItem { Image(systemName: "network")
-                        Text("Web")
-                    }
-                RealtimeNote()
-                    .tabItem { Image(systemName: "note.text")
-                        Text("RealtimeNote")
-                    }
+                Section(header: Text("奉仕の記録")){
+                    NavigationLink(destination: MinistryRecordTotalView())
+                    { Text("合計") }
+                    NavigationLink(destination: MinistryRecordMonth())
+                    { Text("月ごとの記録") }
+                    NavigationLink(destination: MinistryRecordMonthGoalView())
+                    { Text("目標") }
+                }
+                Section(header: Text("RealtimeNote")){
+                    NavigationLink(destination: RealtimeNote())
+                    { Image(systemName: "note.text")
+                        Text("RealtimeNote") }
+                    NavigationLink(destination: RealtimeNoteEditor())
+                    { Image(systemName: "pencil")
+                        Text("Editor") }
+                }
             }
             HomeView()
                 .navigationTitle("\(WindowName)")
