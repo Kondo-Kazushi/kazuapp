@@ -9,7 +9,7 @@ import SwiftUI
 import Foundation
 import MapKit
 
-    
+
 struct SettingsView: View {
     
     @AppStorage("Nickname") var nickname = "ゲスト"
@@ -25,70 +25,57 @@ struct SettingsView: View {
     @AppStorage("WindowName") var WindowName = "kazuapp"
     @AppStorage("IntroduceUrl") var IntroduceUrl = "https://kazusite.github.io/aboutme"
     @AppStorage("IntroduceUrlTitle") var IntroduceUrlTitle = "かずしのポートフォリオ"
-    @ObservedObject var goal = MinistryGoal()
+    
     
     var body: some View {
         
-            Form {
-                Section(header: Text("プロフィール")) {
-                    TextField("ニックネーム", text: $nickname)
-                    TextEditor(text: $introduce)
-                    TextField("自己紹介のURL", text: $IntroduceUrl)
-                    TextField("自己紹介のURLのタイトル", text: $IntroduceUrlTitle)
-                }
-                
-                Section(header: Text("Map"), footer: Text("なぜか整数しか入力できません")) {
-                    TextField("緯度", value: $locationlatitude, formatter: NumberFormatter())
-                        .keyboardType(.numbersAndPunctuation)
-                    TextField("経度", value: $locationlongitude, formatter: NumberFormatter())
-                        .keyboardType(.numbersAndPunctuation)
-                    }
-
-                Section(header: Text("Webブックマーク")) {
-                    TextField("ブックマーク1", text: $myUrl)
-                        .autocapitalization(.none)
-                        .keyboardType(.URL)
-                    TextField("ブックマーク2", text: $myUrl2)
-                        .autocapitalization(.none)
-                        .keyboardType(.URL)
-                    TextField("ブックマーク3", text: $myUrl3)
-                        .autocapitalization(.none)
-                        .keyboardType(.URL)
-                    TextField("ブックマーク4", text: $myUrl4)
-                        .autocapitalization(.none)
-                        .keyboardType(.URL)
-                    TextField("ブックマーク5", text: $myUrl5)
-                        .autocapitalization(.none)
-                        .keyboardType(.URL)
-                    
-                    }
-                Section(header: Text("奉仕の目標")) {
-                    Stepper(value: $goal.level, in: 1...200) {
-                        Text("時間 : \(goal.level)")
-                        if goal.level == 50 {
-                            Text("補助開拓奉仕")
-                        }else if goal.level == 70 {
-                            Text("正規開拓奉仕！")
-                        }else if goal.level == 30 {
-                            Text("臨時の補助開拓奉仕")
-                        }else {
-                            Text("")
-                        }
-                    }
-                    NavigationLink(destination: MinistryRecordMonthGoalView())
-                    { Text("詳細設定") }
-
-                }
-                
-                Section(header: Text("Appの設定")) {
-                    TextField("ウィンドウの名前", text: $WindowName)
-                        .autocapitalization(.none)
-                    }
-                }.navigationTitle("設定")
+        Form {
+            Section(header: Text("プロフィール")) {
+                TextField("ニックネーム", text: $nickname)
+                TextEditor(text: $introduce)
+                TextField("自己紹介のURL", text: $IntroduceUrl)
+                TextField("自己紹介のURLのタイトル", text: $IntroduceUrlTitle)
             }
-struct SettingsView_Previews: PreviewProvider {
-    static var previews: some View {
-        SettingsView()
+            
+            Section(header: Text("Map"), footer: Text("なぜか整数しか入力できません")) {
+                TextField("緯度", value: $locationlatitude, formatter: NumberFormatter())
+                    .keyboardType(.numbersAndPunctuation)
+                TextField("経度", value: $locationlongitude, formatter: NumberFormatter())
+                    .keyboardType(.numbersAndPunctuation)
+            }
+            
+            Section(header: Text("Webブックマーク")) {
+                TextField("ブックマーク1", text: $myUrl)
+                    .autocapitalization(.none)
+                    .keyboardType(.URL)
+                TextField("ブックマーク2", text: $myUrl2)
+                    .autocapitalization(.none)
+                    .keyboardType(.URL)
+                TextField("ブックマーク3", text: $myUrl3)
+                    .autocapitalization(.none)
+                    .keyboardType(.URL)
+                TextField("ブックマーク4", text: $myUrl4)
+                    .autocapitalization(.none)
+                    .keyboardType(.URL)
+                TextField("ブックマーク5", text: $myUrl5)
+                    .autocapitalization(.none)
+                    .keyboardType(.URL)
+                
+            }
+            Section(header: Text("奉仕の目標"))  {
+                NavigationLink(destination: MinistryRecordMonthGoalView())
+                { Text("詳細設定") }
+            }
+            
+            Section(header: Text("Appの設定")) {
+                TextField("ウィンドウの名前", text: $WindowName)
+                    .autocapitalization(.none)
+            }
+        }.navigationTitle("設定")
     }
-}
+    struct SettingsView_Previews: PreviewProvider {
+        static var previews: some View {
+            SettingsView()
+        }
+    }
 }
