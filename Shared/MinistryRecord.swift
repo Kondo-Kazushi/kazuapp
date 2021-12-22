@@ -12,10 +12,12 @@ var CancelWord = "キャンセル"
 
 //MARK: 1
 
+
 struct MinistryRecord1: View, InputTimeDelegate {
     @State var time1: [String] = []
     @State var times1: [Int] = []
     @State private var showingModal = false
+    
     var body: some View {
         ZStack {
             Text("")
@@ -24,11 +26,19 @@ struct MinistryRecord1: View, InputTimeDelegate {
                     NavigationLink(destination:
                                     List {
                         Text(user)
+                        
+                        
+                        
+                        
                     })
                     {Text("\(user)")}
                     
                 }
                 .onDelete(perform: delete)
+                ForEach(times1, id: \.self){ times1Int in
+                    let times1string = times1Int.description
+                    Text(times1string)
+                }
                 Button(action: {
                     self.showingModal.toggle()
                 }) {
@@ -37,7 +47,7 @@ struct MinistryRecord1: View, InputTimeDelegate {
                         Text(AddWord)
                     }
                 }.sheet(isPresented: $showingModal) {
-                    MinistryRecordInput1(ministryRecord1: self, time1: "")
+                    MinistryRecordInput1(ministryRecord1: self, time1: "", times1: 0)
                 }
             }
         }
@@ -56,6 +66,10 @@ struct MinistryRecord1: View, InputTimeDelegate {
         time1.append(text)
         UserDefaults.standard.setValue(time1, forKey: "TIME1")
     }
+    func addTimes1(text: String) {
+        UserDefaults.standard.setValue(times1, forKey: "TIMES1")
+    }
+    
 }
 
 struct MinistryRecord1_Previews: PreviewProvider {
@@ -142,16 +156,17 @@ class MinistryTime1: ObservableObject {
 struct MinistryRecordInput1: View {
     let ministryRecord1: InputTimeDelegate
     @State var time1: String
+    @State var times1: Int
     @Environment(\.isPresented) var isPresented
     @Environment(\.dismiss) var dismiss
-    @ObservedObject var times1 = MinistryTime1()
+    
     
     var body: some View {
         VStack {
             Form {
                 Section(header: Text("奉仕の記録")){
-                    Stepper(value: $times1.times1, in: 1...200){
-                        Text("\(times1.times1)")
+                    Stepper(value: $times1,in:0...12){
+                        Text("\(times1)")
                     }
                     TextField("奉仕時間", text: $time1)
                 }

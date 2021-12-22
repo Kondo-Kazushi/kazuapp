@@ -102,6 +102,7 @@ struct ContentView: View {
                         Text("Editor") }
                 }
             }
+            .navigationTitle("kazuapp")
             HomeView()
                 .navigationTitle("\(WindowName)")
         }

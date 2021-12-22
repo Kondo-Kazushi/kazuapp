@@ -9,6 +9,7 @@ import SwiftUI
 struct TodoView: View, InputViewDelegate {
     @State var todos: [String] = []
     @State private var showingModal = false
+
     var body: some View {
         
         ZStack {
