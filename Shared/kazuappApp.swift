@@ -11,30 +11,12 @@ import SwiftUI
 
 
 struct kazuappApp: App {
+    @StateObject private var eventData = EventData()
     var body: some Scene {
-        
         SwiftUI.WindowGroup {
             ContentView()
-        }
-        .commands {
-            // (1)
-            CommandMenu("MyMenu") {
-                MyCommand1()
-            }
+                .environmentObject(eventData)
         }
     }
 
-}
-
-struct MyCommand1: View {
-    var body: some View {
-        Button(action: {
-            print("MyCommand1")
-        }, label: {
-            // (2)
-            Text("MyCommand1")
-        })
-        // (3)
-            .keyboardShortcut("1", modifiers: [.shift, .command])
-    }
 }

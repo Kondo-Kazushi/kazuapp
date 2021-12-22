@@ -60,6 +60,10 @@ struct ContentView: View {
                     { Image(systemName: "checklist").foregroundColor(.green)
                         Text("Todo")
                     }
+                    NavigationLink(destination: EventList2())
+                    { Image(systemName: "checklist").foregroundColor(.green)
+                        Text("DatePlanner")
+                    }
                 }
                 Section(header: Text("Web")){
                     Section(header: Text("Recommend")){

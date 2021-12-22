@@ -25,6 +25,7 @@ struct SettingsView: View {
     @AppStorage("WindowName") var WindowName = "kazuapp"
     @AppStorage("IntroduceUrl") var IntroduceUrl = "https://kazusite.github.io/aboutme"
     @AppStorage("IntroduceUrlTitle") var IntroduceUrlTitle = "かずしのポートフォリオ"
+    @ObservedObject var goal = MinistryGoal()
     
     var body: some View {
         
@@ -61,6 +62,23 @@ struct SettingsView: View {
                         .keyboardType(.URL)
                     
                     }
+                Section(header: Text("奉仕の目標")) {
+                    Stepper(value: $goal.level, in: 1...200) {
+                        Text("時間 : \(goal.level)")
+                        if goal.level == 50 {
+                            Text("補助開拓奉仕")
+                        }else if goal.level == 70 {
+                            Text("正規開拓奉仕！")
+                        }else if goal.level == 30 {
+                            Text("臨時の補助開拓奉仕")
+                        }else {
+                            Text("")
+                        }
+                    }
+                    NavigationLink(destination: MinistryRecordMonthGoalView())
+                    { Text("詳細設定") }
+
+                }
                 
                 Section(header: Text("Appの設定")) {
                     TextField("ウィンドウの名前", text: $WindowName)
